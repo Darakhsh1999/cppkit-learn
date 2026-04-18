@@ -41,12 +41,9 @@ Eigen::MatrixXf readCSVToMatrix(const std::string& filename, bool contains_heade
     if (!file.is_open())
         throw std::runtime_error("Could not open file: " + filename);
 
-    // Text string for each row in CSV file
-    std::string line;
-    
-    // Temporary Matrix of vectors
-    std::vector<std::vector<float>> rowData;
-    std::vector<std::string> fields;
+    std::string line; // String placeholder for each row in CSV file
+    std::vector<std::vector<float>> rowData; // Temporary Matrix "vector of vectors"
+    std::vector<std::string> fields; // Vector data values in string format
 
     // Extract headers
     if (contains_header && std::getline(file, line))
@@ -69,6 +66,7 @@ Eigen::MatrixXf readCSVToMatrix(const std::string& filename, bool contains_heade
         std::vector<float> row;
         row.reserve(fields.size());
 
+        // Convert values from string to float
         for (size_t col = 0; col < fields.size(); col++) {
             try {
                 row.push_back(std::stof(fields[col]));
