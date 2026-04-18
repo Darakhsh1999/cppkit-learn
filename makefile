@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -O2 -march=native
+CFLAGS = -O2 -march=native -I/usr/include/eigen3
 
 .PHONY : all
 all : \
@@ -8,24 +8,24 @@ all : \
 	third_executable \
 
 
-# this is a comment
-
 # target_name : prerequisites
 # 	recipe
-first_executable : first_program.cpp
-	g++ -o first_executable first_program.cpp
-
-second_executable : second_program.cpp
-	g++ -o second_executable first_program.cpp
 
 # $@ = target_name , $< = first prerequisites, $^ = all prerequisites
-third_exectuable : third_program.cpp
+
+data_loading_example : examples/data_loading_example.cpp
+	$(CC) $(CFLAGS) -o $@ $<
+
+timer_example : examples/timer_example.cpp timer.cpp
+	$(CC) $(CFLAGS) -o $@ $^
+
+eigen_example : eigen_example.cpp
 	$(CC) $(CFLAGS) -o $@ $<
 
 
 .PHONY : clean
 clean : 
 	rm -rf \
-		first_executable \
-		second_program \
-		third_exectuable
+		data_loading_example \
+		timer_example \
+		eigen_example \
