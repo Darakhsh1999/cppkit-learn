@@ -1,0 +1,22 @@
+- ML algorithms in C++
+	- linear regression [x]
+	- logistic regression
+	- K-means clustering
+	- Ridge Regression (L2)
+	- Lasso Regression (L1)
+	- KNN
+	- SVM
+	- Decision tree
+	- Random forest
+	- Naive bayes
+	- GMM
+	- DBSCAN
+	- HBDSCAN
+	- LDA
+	- PCA
+	- Gradient boosting 
+	- Hierichal clustering
+	- Adaboost
+	- XGBoost
+
+
