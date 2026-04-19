@@ -7,6 +7,7 @@ all : \
 	data_loading_example \
 	timer_example \
 	eigen_example \
+	linear_regression_example \
 
 
 # target_name : prerequisites
@@ -23,6 +24,9 @@ timer_example : examples/timer_example.cpp timer.cpp
 eigen_example : examples/eigen_example.cpp
 	$(CC) $(CFLAGS) -o $@ $<
 
+linear_regression_example : examples/linear_regression_example.cpp csv_reader.cpp timer.cpp LinearRegression.cpp
+	$(CC) $(CFLAGS) -o $@ $^
+
 
 .PHONY : clean
 clean : 
@@ -30,3 +34,4 @@ clean :
 		data_loading_example \
 		timer_example \
 		eigen_example \
+		linear_regression_example \

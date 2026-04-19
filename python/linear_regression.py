@@ -2,23 +2,24 @@ import os
 import numpy as np
 import pandas as pd
 from perf_timer import Timer
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
 
 timer = Timer()
 
-# Load data
+# Load train data
 timer.start()
-data = pd.read_csv(os.path.join("..","data","regression_data.csv"))
+train_data = pd.read_csv(os.path.join("..","data","regression_data_train.csv"))
 data_load_time = timer.stop()
 
-y = data["target"]
-X = data.drop(columns="target", axis=1)
+y_train = train_data["target"]
+X_train = train_data.drop(columns="target", axis=1)
 
-# Train test splits
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1999)
+# Load test data
+test_data = pd.read_csv(os.path.join("..","data","regression_data_test.csv"))
+y_test = test_data["target"]
+X_test = test_data.drop(columns="target", axis=1)
 
 # Fit model
 timer.start()
@@ -34,8 +35,13 @@ inference_time = timer.stop()
 # Calculate score
 mse = mean_squared_error(y_test,y_pred)
 
+betas = np.array([model.intercept_]+list(model.coef_))
+
 # Result logging
 print(f"Data loading time: {1000*data_load_time:.4f} ms")
 print(f"Fit time: {1000*fit_time:.4f} ms")
 print(f"Inference time: {1000*inference_time:.4f} ms")
 print(f"MSE = {mse:.3f}")
+np.set_printoptions(suppress=True)
+print(f"Coefficients {betas}")
+print(f"y_pred = {y_pred[0]:.3f}")
