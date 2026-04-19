@@ -66,7 +66,7 @@ Eigen::MatrixXf readCSVToMatrix(const std::string& filename, bool contains_heade
         std::vector<float> row;
         row.reserve(fields.size());
 
-        // Convert values from string to float
+        // Convert each field value from string to float
         for (size_t col = 0; col < fields.size(); col++) {
             try {
                 row.push_back(std::stof(fields[col]));
